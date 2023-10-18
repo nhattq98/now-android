@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
 
 
-// git access token: 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
+// git access token: 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
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
