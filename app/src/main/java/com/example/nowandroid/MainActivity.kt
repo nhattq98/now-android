@@ -6,7 +6,7 @@ import androidx.compose.ui.platform.ComposeView
 import com.example.nowandroid.feature.chat.ChatScreenContent
 
 
-// git access token: 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
+// git access token: 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
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
