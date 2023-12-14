@@ -2,10 +2,8 @@ package com.example.nowandroid
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
+import com.example.nowandroid.feature.chat.ChatScreenContent
 
 
 // git access token: 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
@@ -16,15 +14,8 @@ class MainActivity : ComponentActivity() {
 
         findViewById<ComposeView>(R.id.compose_view).apply {
             setContent {
-                HomeScreen()
+                ChatScreenContent()
             }
         }
-    }
-}
-
-@Composable
-fun HomeScreen() {
-    Surface {
-        Text(text = "Hello Compose")
     }
 }
