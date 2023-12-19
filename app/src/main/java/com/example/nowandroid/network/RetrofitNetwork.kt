@@ -1,24 +1,27 @@
 package com.example.nowandroid.network
 
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.example.nowandroid.BuildConfig
+import com.example.nowandroid.model.ChatCompletions
+import com.example.nowandroid.model.ChatCompletionsResponse
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import okhttp3.Call
-import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
+import retrofit2.http.POST
 import javax.inject.Inject
 import javax.inject.Singleton
 
-
-private interface RetrofitOpenAINetworkApi {
-
-}
-
 @Serializable
-private data class NetworkResponse<T>(
+data class NetworkResponse<T>(
     val data: T,
 )
 
+private interface RetrofitOpenAINetworkApi {
+    @POST("chat/completions")
+    suspend fun chatCompletions(@Body chatCompletions: ChatCompletions): NetworkResponse<ChatCompletionsResponse>
+}
 
 @Singleton
 class RetrofitOpenAINetwork @Inject constructor(
@@ -26,13 +29,13 @@ class RetrofitOpenAINetwork @Inject constructor(
     okhttpCallFactory: Call.Factory,
 ) : RetrofitOpenAINetworkApi {
 
-    private val baseUrl = ""
     private val networkApi = Retrofit.Builder()
-        .baseUrl(baseUrl)
+        .baseUrl("https://api.openai.com/v1/")
         .callFactory(okhttpCallFactory)
-        .addConverterFactory(
-            networkJson.asConverterFactory("application/json".toMediaType()),
-        )
+        .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(RetrofitOpenAINetworkApi::class.java)
+
+    override suspend fun chatCompletions(chatCompletions: ChatCompletions): NetworkResponse<ChatCompletionsResponse> =
+        networkApi.chatCompletions(chatCompletions)
 }
