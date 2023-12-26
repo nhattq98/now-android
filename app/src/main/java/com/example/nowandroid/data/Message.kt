@@ -1,5 +1,6 @@
 package com.example.nowandroid.data
 
+import android.content.Context
 import com.example.nowandroid.R
 
 data class Message(
@@ -8,7 +9,7 @@ data class Message(
     val isMe: Boolean,
     val avatar: Int = R.drawable.ali,
 ){
-    fun getAuthorName(): String{
-        return if(!isMe) "aiBot" else "me"
+    fun getAuthorName(context: Context): String{
+        return if(!isMe) context.getString(R.string.aibot) else context.getString(R.string.me)
     }
 }

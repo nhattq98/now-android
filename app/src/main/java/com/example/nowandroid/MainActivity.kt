@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
 
         findViewById<ComposeView>(R.id.compose_view).apply {
             setContent {
-                ChatScreenContent()
+//                ChatScreenContent()
             }
         }
     }

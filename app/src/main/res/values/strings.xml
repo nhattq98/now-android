@@ -44,4 +44,6 @@
     <string name="cd_navigate_interests">Navigate to the interests screen</string>
     <string name="message">Message ...</string>
     <string name="send">Send</string>
+    <string name="aibot">aiBot</string>
+    <string name="me">me</string>
 </resources>
