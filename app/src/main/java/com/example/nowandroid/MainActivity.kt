@@ -1,21 +1,35 @@
 package com.example.nowandroid
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.compose.ui.platform.ComposeView
-import com.example.nowandroid.feature.chat.ChatScreenContent
+import androidx.appcompat.app.AppCompatActivity
+import com.example.nowandroid.model.ChatCompletions
+import com.example.nowandroid.network.RetrofitOpenAINetwork
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
 
-// git access token: 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
-class MainActivity : ComponentActivity() {
+    @Inject
+    lateinit var api: RetrofitOpenAINetwork
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<ComposeView>(R.id.compose_view).apply {
-            setContent {
-//                ChatScreenContent()
-            }
+        test()
+    }
+
+    fun test() {
+        getString(R.string.api_key)
+        CoroutineScope(Dispatchers.IO).launch {
+            val param = ChatCompletions(
+                model = "gpt-3.5",
+                messages = listOf()
+            )
+            api.chatCompletions(param)
         }
     }
 }
