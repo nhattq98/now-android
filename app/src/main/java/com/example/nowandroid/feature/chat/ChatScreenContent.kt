@@ -18,20 +18,25 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.nowandroid.data.initialMessage
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.nowandroid.data.Message
 import com.example.nowandroid.feature.widgets.AppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatScreenContent(
-    uiState: MessageUiState,
     modifier: Modifier = Modifier,
+    viewModel: ChatScreenViewModel = hiltViewModel(),
 ) {
     val topBarState = rememberTopAppBarState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topBarState)
     val scrollState = rememberLazyListState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
@@ -50,6 +55,7 @@ fun ChatScreenContent(
             .contentWindowInsets
             .exclude(WindowInsets.navigationBars)
             .exclude(WindowInsets.ime),
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
     ) {
         Column(
             modifier = Modifier
@@ -62,7 +68,15 @@ fun ChatScreenContent(
                 scrollState = scrollState
             )
             UserInput(
-                onMessageSent = {},
+                onMessageSent = {content ->
+                    uiState.addMessage(
+                        Message(
+                            content = content,
+                            isMe = true,
+                            timeStamp = System.currentTimeMillis()
+                        )
+                    )
+                },
                 modifier = Modifier
                     .navigationBarsPadding()
                     .imePadding()
@@ -74,8 +88,5 @@ fun ChatScreenContent(
 @Preview
 @Composable
 fun PreviewChatScreenContent() {
-    val mockUiState = MessageUiState(
-        initialMessages = initialMessage
-    )
-    ChatScreenContent(uiState = mockUiState)
+    ChatScreenContent()
 }

@@ -5,11 +5,11 @@ import com.example.nowandroid.R
 
 data class Message(
     val content: String,
-    val timeStamp: String,
+    val timeStamp: Long,
     val isMe: Boolean,
-    val avatar: Int = R.drawable.ali,
-){
-    fun getAuthorName(context: Context): String{
-        return if(!isMe) context.getString(R.string.aibot) else context.getString(R.string.me)
+    val avatar: Int = if (isMe) R.drawable.ali else R.drawable.openai_thumb,
+) {
+    fun getAuthorName(context: Context): String {
+        return if (!isMe) context.getString(R.string.aibot) else context.getString(R.string.me)
     }
 }

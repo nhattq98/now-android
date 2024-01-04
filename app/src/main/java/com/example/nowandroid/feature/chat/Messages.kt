@@ -146,7 +146,7 @@ fun NameAndTimeStamp(msg: Message) {
         Spacer(modifier = Modifier.width(8.dp))
 
         Text(
-            text = msg.timeStamp,
+            text = msg.timeStamp.toString(),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.alignBy(LastBaseline),
@@ -186,7 +186,7 @@ fun BubbleChat(
 fun PreviewMessageBotRow() {
     val mockMsg = Message(
         content = "Hello AI Chat",
-        timeStamp = "3 Mininutes late",
+        timeStamp = System.currentTimeMillis(),
         isMe = false,
         avatar = R.drawable.ali
     )
@@ -198,7 +198,7 @@ fun PreviewMessageBotRow() {
 fun PreviewMessageUserRow() {
     val mockMsg = Message(
         content = "Hello Ai Chat",
-        timeStamp = "3 Mininutes late",
+        timeStamp = System.currentTimeMillis(),
         isMe = true,
         avatar = R.drawable.ali
     )
