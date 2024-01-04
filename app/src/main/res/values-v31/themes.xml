@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.NowAndroid.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/background_splash_screen</item>
+        <item name="postSplashScreenTheme">@style/Theme.NowAndroid</item>
+    </style>
+</resources>

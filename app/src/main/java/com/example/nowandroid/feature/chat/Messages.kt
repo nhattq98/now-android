@@ -78,8 +78,6 @@ fun MessageBotRow(
             .clickable { }
             .padding(horizontal = 8.dp)
             .size(42.dp)
-            .border(1.5.dp, MaterialTheme.colorScheme.primary, CircleShape)
-            .border(3.dp, MaterialTheme.colorScheme.surface, CircleShape)
             .clip(CircleShape)
             .align(Alignment.Top)
         Image(
