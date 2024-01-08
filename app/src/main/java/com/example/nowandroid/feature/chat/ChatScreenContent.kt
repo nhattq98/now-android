@@ -1,6 +1,8 @@
 package com.example.nowandroid.feature.chat
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,9 +23,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.nowandroid.R
 import com.example.nowandroid.data.Message
 import com.example.nowandroid.feature.widgets.AppBar
 
@@ -44,7 +49,7 @@ fun ChatScreenContent(
                 modifier = Modifier,
                 title = {
                     Text(
-                        text = "#aiChatBot",
+                        text = stringResource(R.string.aichatbot),
                         style = MaterialTheme.typography.titleMedium
                     )
                 },
@@ -67,15 +72,20 @@ fun ChatScreenContent(
                 modifier = Modifier.weight(1f),
                 scrollState = scrollState
             )
-            UserInput(
-                onMessageSent = {content ->
-                    uiState.addMessage(
-                        Message(
-                            content = content,
-                            isMe = true,
-                            timeStamp = System.currentTimeMillis()
-                        )
+            if (uiState.isLoading) {
+                Row {
+                    Spacer(modifier = Modifier.weight(1f))
+                    Text(
+                        text = "message is sending ...",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.secondary,
+                        modifier = Modifier.padding(end = 8.dp, bottom = 8.dp)
                     )
+                }
+            }
+            UserInput(
+                onMessageSent = { content ->
+                    viewModel.conversation(content)
                 },
                 modifier = Modifier
                     .navigationBarsPadding()

@@ -1,6 +1,5 @@
 package com.example.nowandroid.network
 
-import com.example.nowandroid.BuildConfig
 import com.example.nowandroid.model.ChatCompletions
 import com.example.nowandroid.model.ChatCompletionsResponse
 import kotlinx.serialization.Serializable
@@ -27,7 +26,7 @@ private interface RetrofitOpenAINetworkApi {
 class RetrofitOpenAINetwork @Inject constructor(
     networkJson: Json,
     okhttpCallFactory: Call.Factory,
-) : RetrofitOpenAINetworkApi {
+) : OpenAINetworkDataSource {
 
     private val networkApi = Retrofit.Builder()
         .baseUrl("https://api.openai.com/v1/")
@@ -36,6 +35,6 @@ class RetrofitOpenAINetwork @Inject constructor(
         .build()
         .create(RetrofitOpenAINetworkApi::class.java)
 
-    override suspend fun chatCompletions(chatCompletions: ChatCompletions): NetworkResponse<ChatCompletionsResponse> =
-        networkApi.chatCompletions(chatCompletions)
+    override suspend fun chatCompletions(chatCompletions: ChatCompletions): ChatCompletionsResponse =
+        networkApi.chatCompletions(chatCompletions).data
 }
