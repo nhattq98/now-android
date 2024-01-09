@@ -1,4 +1,4 @@
-package com.example.nowandroid.reporsitories
+package com.example.nowandroid.repositories
 
 sealed class WorkResult<out R> {
     data class Success<out T>(val data: T) : WorkResult<T>()

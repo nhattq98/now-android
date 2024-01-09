@@ -2,7 +2,7 @@ package com.example.nowandroid.di
 
 import com.example.nowandroid.network.OpenAINetworkDataSource
 import com.example.nowandroid.network.RetrofitOpenAINetwork
-import com.example.nowandroid.reporsitories.ChatRepository
+import com.example.nowandroid.repositories.ChatRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

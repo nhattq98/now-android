@@ -6,7 +6,7 @@ import com.example.nowandroid.data.MessageItem
 import com.example.nowandroid.data.initialMessage
 import com.example.nowandroid.model.ChatCompletionParamRequest
 import com.example.nowandroid.model.Message
-import com.example.nowandroid.reporsitories.ChatRepository
+import com.example.nowandroid.repositories.ChatRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import com.example.nowandroid.reporsitories.WorkResult
+import com.example.nowandroid.repositories.WorkResult
 import kotlinx.coroutines.flow.first
 
 @HiltViewModel

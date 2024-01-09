@@ -1,9 +1,8 @@
-package com.example.nowandroid.reporsitories
+package com.example.nowandroid.repositories
 
 import com.example.nowandroid.model.ChatCompletionParamRequest
 import com.example.nowandroid.model.ChatCompletions
 import com.example.nowandroid.network.OpenAINetworkDataSource
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -16,7 +15,6 @@ interface IChatRepository {
 }
 
 class ChatRepository @Inject constructor(
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val openAINetworkDataSource: OpenAINetworkDataSource,
 ) : IChatRepository {
     override suspend fun conversation(chatCompletions: ChatCompletionParamRequest): Flow<WorkResult<ChatCompletions>> {
@@ -27,6 +25,6 @@ class ChatRepository @Inject constructor(
             )
         }.map {
             WorkResult.Success(it)
-        }.flowOn(ioDispatcher)
+        }.flowOn(Dispatchers.IO)
     }
 }
