@@ -1,12 +1,12 @@
 package com.example.nowandroid.feature.chat
 
-import com.example.nowandroid.data.Message
+import com.example.nowandroid.data.MessageItem
 
 data class ChatUiState(
-    val messages: MutableList<Message>,
+    val messages: MutableList<MessageItem>,
     var isLoading: Boolean = false,
 ) {
-    fun addMessage(msg: Message): ChatUiState{
+    fun addMessage(msg: MessageItem): ChatUiState{
         messages.add(0, msg)
         return this
     }

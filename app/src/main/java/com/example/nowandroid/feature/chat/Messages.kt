@@ -32,11 +32,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.nowandroid.R
-import com.example.nowandroid.data.Message
+import com.example.nowandroid.data.MessageItem
 
 @Composable
 fun Messages(
-    messages: List<Message>,
+    messages: List<MessageItem>,
     scrollState: LazyListState,
     modifier: Modifier = Modifier
 ) {
@@ -57,7 +57,7 @@ fun Messages(
 }
 
 @Composable
-fun MessageRow(message: Message) {
+fun MessageRow(message: MessageItem) {
     val isMe = message.isMe
 
     if (isMe) {
@@ -69,7 +69,7 @@ fun MessageRow(message: Message) {
 
 @Composable
 fun MessageBotRow(
-    message: Message
+    message: MessageItem
 ) {
     Row(
         modifier = Modifier.padding(bottom = 8.dp)
@@ -93,7 +93,7 @@ fun MessageBotRow(
 
 @Composable
 fun MessageUserRow(
-    message: Message
+    message: MessageItem
 ) {
     Row(
         modifier = Modifier.padding(bottom = 8.dp)
@@ -120,7 +120,7 @@ fun MessageUserRow(
 
 @Composable
 fun AuthorAndTextMessage(
-    message: Message,
+    message: MessageItem,
     isMe: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -131,7 +131,7 @@ fun AuthorAndTextMessage(
 }
 
 @Composable
-fun NameAndTimeStamp(msg: Message) {
+fun NameAndTimeStamp(msg: MessageItem) {
     Row {
         Text(
             text = msg.getAuthorName(LocalContext.current),
@@ -158,7 +158,7 @@ private val UserChatBubbleShape = RoundedCornerShape(20.dp, 4.dp, 20.dp, 20.dp)
 @Composable
 fun BubbleChat(
     isMe: Boolean,
-    message: Message,
+    message: MessageItem,
 ) {
     val backgroundBubbleColor = if (isMe) {
         MaterialTheme.colorScheme.primary
@@ -182,7 +182,7 @@ fun BubbleChat(
 @Preview
 @Composable
 fun PreviewMessageBotRow() {
-    val mockMsg = Message(
+    val mockMsg = MessageItem(
         content = "Hello AI Chat",
         timeStamp = System.currentTimeMillis(),
         isMe = false,
@@ -194,7 +194,7 @@ fun PreviewMessageBotRow() {
 @Preview
 @Composable
 fun PreviewMessageUserRow() {
-    val mockMsg = Message(
+    val mockMsg = MessageItem(
         content = "Hello Ai Chat",
         timeStamp = System.currentTimeMillis(),
         isMe = true,

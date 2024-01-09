@@ -31,5 +31,17 @@ object NetworkModule {
                     }
                 },
         )
+        .addInterceptor { chain ->
+            chain.proceed(
+                chain.request()
+                    .newBuilder()
+                    .also {
+                        it.addHeader(
+                            "Authorization",
+                            "Bearer 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"
+                        )
+                    }.build()
+            )
+        }
         .build()
 }

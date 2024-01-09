@@ -1,12 +1,12 @@
 package com.example.nowandroid.data
 
 val initialMessage = listOf(
-    Message(
+    MessageItem(
         content = "Hello Ai Chat",
         timeStamp = System.currentTimeMillis(),
         isMe = true,
     ),
-    Message(
+    MessageItem(
         content = "Hello , i am GPT 4",
         timeStamp = System.currentTimeMillis(),
         isMe = false

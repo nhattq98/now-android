@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.nowandroid.R
-import com.example.nowandroid.data.Message
 import com.example.nowandroid.feature.widgets.AppBar
 
 @OptIn(ExperimentalMaterial3Api::class)

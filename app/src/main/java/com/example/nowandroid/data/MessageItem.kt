@@ -3,7 +3,7 @@ package com.example.nowandroid.data
 import android.content.Context
 import com.example.nowandroid.R
 
-data class Message(
+data class MessageItem(
     val content: String,
     val timeStamp: Long,
     val isMe: Boolean,
