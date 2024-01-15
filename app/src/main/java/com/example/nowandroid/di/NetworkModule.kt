@@ -38,7 +38,7 @@ object NetworkModule {
                     .also {
                         it.addHeader(
                             "Authorization",
-                            "Bearer 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"
+                            "Bearer ${BuildConfig.API_KEY}"
                         )
                     }.build()
             )

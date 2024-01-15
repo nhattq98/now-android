@@ -7,7 +7,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 interface IChatRepository {
@@ -19,12 +18,14 @@ class ChatRepository @Inject constructor(
 ) : IChatRepository {
     override suspend fun conversation(chatCompletions: ChatCompletionParamRequest): Flow<WorkResult<ChatCompletions>> {
         return flow {
-            emit(
-                openAINetworkDataSource
-                    .chatCompletions(chatCompletions)
-            )
-        }.map {
-            WorkResult.Success(it)
+            val result = openAINetworkDataSource
+                .chatCompletions(chatCompletions)
+
+            try {
+                emit(WorkResult.Success(result))
+            } catch (ex: Exception) {
+                emit(WorkResult.Error(ex))
+            }
         }.flowOn(Dispatchers.IO)
     }
 }
