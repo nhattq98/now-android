@@ -18,14 +18,14 @@ class ChatRepository @Inject constructor(
 ) : IChatRepository {
     override suspend fun conversation(chatCompletions: ChatCompletionParamRequest): Flow<WorkResult<ChatCompletions>> {
         return flow {
-            val result = openAINetworkDataSource
-                .chatCompletions(chatCompletions)
-
             try {
+                val result = openAINetworkDataSource
+                    .chatCompletions(chatCompletions)
                 emit(WorkResult.Success(result))
             } catch (ex: Exception) {
                 emit(WorkResult.Error(ex))
             }
+
         }.flowOn(Dispatchers.IO)
     }
 }

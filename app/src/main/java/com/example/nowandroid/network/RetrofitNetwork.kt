@@ -2,6 +2,7 @@ package com.example.nowandroid.network
 
 import com.example.nowandroid.model.ChatCompletionParamRequest
 import com.example.nowandroid.model.ChatCompletions
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
 import okhttp3.Call
 import retrofit2.Retrofit
@@ -13,12 +14,13 @@ import javax.inject.Singleton
 
 @Serializable
 data class NetworkResponse<T>(
+    @SerializedName("data")
     val data: T,
 )
 
 private interface RetrofitOpenAINetworkApi {
     @POST("chat/completions")
-    suspend fun chatCompletions(@Body chatCompletions: ChatCompletionParamRequest): NetworkResponse<ChatCompletions>
+    suspend fun chatCompletions(@Body chatCompletions: ChatCompletionParamRequest): ChatCompletions
 }
 
 @Singleton
@@ -34,5 +36,5 @@ class RetrofitOpenAINetwork @Inject constructor(
         .create(RetrofitOpenAINetworkApi::class.java)
 
     override suspend fun chatCompletions(chatCompletions: ChatCompletionParamRequest): ChatCompletions =
-        networkApi.chatCompletions(chatCompletions).data
+        networkApi.chatCompletions(chatCompletions)
 }
